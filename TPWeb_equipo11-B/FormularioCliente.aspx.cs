@@ -29,7 +29,7 @@ namespace TPWeb_equipo11_B
             cliente.CodPostal = int.Parse(cp.Text);
 
             clienteNegocio.agregarCliente(cliente);
-
+            Response.Redirect("VistaExito.aspx");
         }
     }
 }
