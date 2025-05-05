@@ -45,7 +45,7 @@
                 Acepta terminos y condiciones
             </label>
         </div>
-        <asp:Button runat="server" Text="Participar!" CssClass="btn btn-primary"/>
+        <asp:Button runat="server" Text="Participar!" OnClick="AgregarCliente" CssClass="btn btn-primary"/>
         
     
     

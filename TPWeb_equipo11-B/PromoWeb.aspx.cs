@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,7 +17,7 @@ namespace TPWeb_equipo11_B
 
         protected void btnPromo_Click(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

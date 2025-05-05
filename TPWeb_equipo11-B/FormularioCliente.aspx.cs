@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +13,22 @@ namespace TPWeb_equipo11_B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+        }
+
+        protected void AgregarCliente(object sender, EventArgs e)
+        {   
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            Cliente cliente = new Cliente();
+            cliente.Dni = int.Parse(dni.Text);
+            cliente.Nombre = nombre.Text;   
+            cliente.Apellido = apellido.Text;   
+            cliente.Email = email.Text;
+            cliente.Direccion = direccion.Text; 
+            cliente.Ciudad = ciudad.Text;
+            cliente.CodPostal = int.Parse(cp.Text);
+
+            clienteNegocio.agregarCliente(cliente);
 
         }
     }
