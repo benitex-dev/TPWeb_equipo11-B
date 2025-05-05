@@ -3,6 +3,6 @@
     <h1>Promo Ganá</h1>
     <label for="codigoPromo" class="form-label">Ingresá el código de tu voucher!</label>
     <asp:TextBox ID="codigoPromo" CssClass="form-control" placeholder="XXXXXXXXXXX" runat="server"></asp:TextBox>
-    <asp:Button ID="btnPromo" CssClass="btn btn-primary mt-2" runat="server" Text="Siguiente" />
+    <asp:Button ID="btnPromo" OnClick="btnPromo_Click" CssClass="btn btn-primary mt-2" runat="server" Text="Siguiente" />
     
 </asp:Content>
