@@ -54,7 +54,7 @@ namespace negocio
 
             try
             {
-                accesoDatos.setConsulta("UPDATE VOUCHERS SET IDCLIENTE = @IdCliente, IDARTICULO = @IdArticulo WHERE CodigoVoucher = @CodigoVoucher ");
+                accesoDatos.setConsulta("UPDATE VOUCHERS SET IDCLIENTE = @IdCliente, IDARTICULO = @IdArticulo, FechaCanje = GETDATE() WHERE CodigoVoucher = @CodigoVoucher ");
                 accesoDatos.setParametro("@CodigoVoucher", voucher.CodigoVoucher);
                 accesoDatos.setParametro("@IdCliente", voucher.Cliente.Id);
                 accesoDatos.setParametro("@IdArticulo", voucher.Articulo.Id);
@@ -69,6 +69,11 @@ namespace negocio
             {
                 accesoDatos.cerrarConexion();
             }
+        }
+
+       public void verificarCodigo(string codigoVoucher)
+        {
+
         }
     }
 
