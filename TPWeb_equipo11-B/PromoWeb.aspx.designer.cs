@@ -15,6 +15,15 @@ namespace TPWeb_equipo11_B
     {
 
         /// <summary>
+        /// Control lblPromo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPromo;
+
+        /// <summary>
         /// Control codigoPromo.
         /// </summary>
         /// <remarks>
@@ -31,5 +40,14 @@ namespace TPWeb_equipo11_B
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnPromo;
+
+        /// <summary>
+        /// Control btnInicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnInicio;
     }
 }
