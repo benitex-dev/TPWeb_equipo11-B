@@ -34,6 +34,7 @@ namespace negocio
                         voucher.IdArticulo = (int)datos.Lector["IdArticulo"];
                     else voucher.IdArticulo = 0;
                     
+                    vouchers.Add(voucher);
                 }
 
                 return vouchers;
@@ -72,23 +73,22 @@ namespace negocio
             }
         }
 
-       public int verificarVoucher(string codigoVoucher)
+        public string verificarVoucher(string codigoVoucher)
         {
-            List <Voucher> listaVoucher = listar();
-            int buscar = 0;
+            List<Voucher> listaVoucher = listar();
 
-            while(buscar < listaVoucher.Count)
+            foreach (Voucher voucher in listaVoucher)
             {
-                Voucher voucher = listaVoucher[buscar];
-
-                if (voucher.CodigoVoucher == codigoVoucher && voucher.FechaCanje == null && voucher.IdCliente == 0 && voucher.IdArticulo == 0)
+                if (voucher.CodigoVoucher == codigoVoucher)
                 {
-                    return 1;
-                }
+                    if (voucher.IdCliente == 0 && voucher.IdArticulo == 0)
+                        return "Código válido";
 
-                buscar++;
+                    return "Código ya usado";
+                }
             }
-            return 0;
+
+            return "Código inválido";
         }
     }
 

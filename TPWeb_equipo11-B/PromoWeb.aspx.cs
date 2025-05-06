@@ -1,10 +1,12 @@
 ﻿using dominio;
+using negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace TPWeb_equipo11_B
 {
@@ -17,8 +19,9 @@ namespace TPWeb_equipo11_B
 
         protected void btnPromo_Click(object sender, EventArgs e)
         {
-            
-            
+            VoucherNegocio negocio = new VoucherNegocio();
+            string validarCodigo = negocio.verificarVoucher(codigoPromo.Text);
+            codigoPromo.Text = validarCodigo;
         }
     }
 }
