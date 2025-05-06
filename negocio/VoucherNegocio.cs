@@ -26,12 +26,13 @@ namespace negocio
                     voucher.CodigoVoucher = (string)datos.Lector["CodigoVoucher"];
                     if (!(datos.Lector["FechaCanje"] is DBNull))
                         voucher.FechaCanje = (DateTime)datos.Lector["FechaCanje"];
-
                     if (!(datos.Lector["IdCliente"] is DBNull))
                         voucher.IdCliente = (int)datos.Lector["IdCliente"];
+                    else voucher.IdCliente = 0;
 
                     if (!(datos.Lector["IdArticulo"] is DBNull))
                         voucher.IdArticulo = (int)datos.Lector["IdArticulo"];
+                    else voucher.IdArticulo = 0;
                     
                 }
 
@@ -71,9 +72,23 @@ namespace negocio
             }
         }
 
-       public void verificarCodigo(string codigoVoucher)
+       public int verificarVoucher(string codigoVoucher)
         {
+            List <Voucher> listaVoucher = listar();
+            int buscar = 0;
 
+            while(buscar < listaVoucher.Count)
+            {
+                Voucher voucher = listaVoucher[buscar];
+
+                if (voucher.CodigoVoucher == codigoVoucher && voucher.FechaCanje == null && voucher.IdCliente == 0 && voucher.IdArticulo == 0)
+                {
+                    return 1;
+                }
+
+                buscar++;
+            }
+            return 0;
         }
     }
 
