@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using negocio;
 
 namespace TPWeb_equipo11_B
 {
@@ -13,8 +15,18 @@ namespace TPWeb_equipo11_B
         {
             if (!IsPostBack)
             {
-                string codigo = Request.QueryString["codigo"];                
+                string codigo = Request.QueryString["codigo"];
+                CargarPremios();
             }
+        }
+
+        private void CargarPremios()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            List<Articulo> listaArticulos = negocio.listar();
+            repRepetidor.DataSource = listaArticulos;
+            repRepetidor.DataBind();
+            
         }
     }
 }

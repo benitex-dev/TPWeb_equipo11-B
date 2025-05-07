@@ -97,7 +97,11 @@ namespace negocio
                     articulo.Categoria = new Categoria();
                     articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
-                    
+
+                    ImagenNegocio ImagenNegocio = new ImagenNegocio();
+                    articulo.Imagenes = ImagenNegocio.listarImagenesArticulo(articulo.Id);
+                    articulo.Imagen = articulo.Imagenes[0];
+
                     articulos.Add(articulo);
                 }
 
