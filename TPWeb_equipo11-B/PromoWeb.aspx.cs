@@ -21,37 +21,42 @@ namespace TPWeb_equipo11_B
         protected void btnPromo_Click(object sender, EventArgs e)
         {
             VoucherNegocio negocio = new VoucherNegocio();
-            string validarCodigo = negocio.verificarVoucher(codigoPromo.Text);
+            string codigo = codigoPromo.Text;
+            string validarCodigo = negocio.verificarVoucher(codigo);
+
             switch (validarCodigo)
             {
                 case("Código válido"):
                     lblPromo.Text = "Felicidades, tu código es válido!";
                     btnPremio.Visible = true;
                     btnPromo.Visible = false;
+                    codigoPromo.Visible = false;
                     break;
                 case ("Código ya usado"):
                     lblPromo.Text = "Lo sentimos! Tu código ya ha sido usado";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
+                    codigoPromo.Visible = false;
                     break;
                 case ("Código inválido"):
                     lblPromo.Text = "Lo sentimos! Tu código no es valido";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
+                    codigoPromo.Visible = false;
                     break;
 
             }
-            codigoPromo.Text = validarCodigo;
+            
         }
 
         protected void btnInicio_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/.");
+            Response.Redirect("/.", false);
         }
 
         protected void btnPremio_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Premios.aspx");
+            Response.Redirect("/Premios.aspx?codigo="+ codigoPromo.Text, false);
         }
     }
 }

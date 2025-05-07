@@ -11,7 +11,10 @@ namespace TPWeb_equipo11_B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                string codigo = Request.QueryString["codigo"];                
+            }
         }
     }
 }
