@@ -25,16 +25,16 @@ namespace TPWeb_equipo11_B
             switch (validarCodigo)
             {
                 case("Código válido"):
-
+                    lblPromo.Text = "Felicidades, tu código es válido!";
+                    btnPremio.Visible = true;
+                    btnPromo.Visible = false;
                     break;
                 case ("Código ya usado"):
-                    btnPromo.Text = "Volver al inicio";
                     lblPromo.Text = "Lo sentimos! Tu código ya ha sido usado";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
                     break;
                 case ("Código inválido"):
-                    btnPromo.Text = "Volver al inicio";
                     lblPromo.Text = "Lo sentimos! Tu código no es valido";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
@@ -47,6 +47,11 @@ namespace TPWeb_equipo11_B
         protected void btnInicio_Click(object sender, EventArgs e)
         {
             Response.Redirect("/.");
+        }
+
+        protected void btnPremio_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/Premios.aspx");
         }
     }
 }

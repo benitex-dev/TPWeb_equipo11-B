@@ -5,6 +5,7 @@
     
     <asp:TextBox ID="codigoPromo" CssClass="form-control" placeholder="XXXXXXXXXXX" runat="server"></asp:TextBox>
     <asp:Button ID="btnPromo" OnClick="btnPromo_Click" CssClass="btn btn-primary mt-2" runat="server" Text="Siguiente" />
-    <asp:Button ID="btnInicio" OnClick="btnInicio_Click" CssClass="btn btn-primary mt-2" runat="server" Text="Inicio" visible="false"/>
+    <asp:Button ID="btnInicio" OnClick="btnInicio_Click" CssClass="btn btn-primary mt-2" runat="server" Text="Volver al Inicio" visible="false"/>
+    <asp:Button ID="btnPremio" Text="Elegir Premio" runat="server" OnClick="btnPremio_Click" CssClass="btn btn-primary mt-2" Visible="false" />
     
 </asp:Content>
