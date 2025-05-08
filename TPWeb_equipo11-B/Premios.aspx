@@ -5,7 +5,7 @@
     <h1>Elegí tu premio</h1>
 
     <div class="d-flex flex-row justify-content-evenly">
-        <asp:Repeater ID="repRepetidor" runat="server">
+        <asp:Repeater ID="repRepetidor"  runat="server" OnItemCommand="repRepetidor_ItemCommand1" >
             <ItemTemplate>
                 <div class="card" style="width: 18rem;">
 
@@ -16,15 +16,15 @@
                     <div class="card-body">
                         <h5 class="card-title"><%# Eval("Nombre") %></h5>
                         <p class="card-text"><%#Eval("Descripcion") %></p>
-                        <a href="#" class="btn btn-primary">Éste</a>
+                        <asp:Button ID="btnPremioEleccion" CommandName="eleccion" CommandArgument='<%# Eval("Id") %>'  class="btn btn-primary" runat="server" Text="Este" />
+                       <%-- <a href="#" class="btn btn-primary" ID="btnPremio">Este</a>  OnItemCommand="repRepetidor_ItemCommand" --%>
                     </div>
                 </div>
 
             </ItemTemplate>
         </asp:Repeater>
 
-     
-        </div>
-    </div>
+     </div>
+ 
 
 </asp:Content>

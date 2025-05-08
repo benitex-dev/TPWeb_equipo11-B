@@ -26,7 +26,14 @@ namespace TPWeb_equipo11_B
             List<Articulo> listaArticulos = negocio.listar();
             repRepetidor.DataSource = listaArticulos;
             repRepetidor.DataBind();
-            
+
+        }
+
+
+        protected void repRepetidor_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        {
+            ///if(e.CommandName == "eleccion")
+            Response.Redirect("FormularioCliente.aspx");
         }
     }
 }
