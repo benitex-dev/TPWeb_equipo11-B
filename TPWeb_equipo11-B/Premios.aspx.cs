@@ -32,7 +32,6 @@ namespace TPWeb_equipo11_B
 
         protected void repRepetidor_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            ///if(e.CommandName == "eleccion")
             Response.Redirect("FormularioCliente.aspx");
         }
     }
