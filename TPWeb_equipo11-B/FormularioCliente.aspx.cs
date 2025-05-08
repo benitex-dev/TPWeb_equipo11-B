@@ -13,7 +13,7 @@ namespace TPWeb_equipo11_B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            int idArticulo = int.Parse(Request.QueryString["Id"]);
         }
 
         protected void AgregarCliente(object sender, EventArgs e)

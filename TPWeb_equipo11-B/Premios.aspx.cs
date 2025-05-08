@@ -32,7 +32,14 @@ namespace TPWeb_equipo11_B
 
         protected void repRepetidor_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("FormularioCliente.aspx");
+            if (e.CommandName == "eleccion")
+            {
+                int idArticulo = Convert.ToInt32(e.CommandArgument);
+                Response.Redirect("FormularioCliente.aspx?Id=" + idArticulo);
+            }
+
         }
+
+
     }
 }
