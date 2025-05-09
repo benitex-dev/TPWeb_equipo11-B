@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +13,15 @@ namespace TPWeb_equipo11_B
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CargarPremios();
+        }
+
+        private void CargarPremios()
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            List<Articulo> listaArticulos = negocio.listar();
+            repRepetidor.DataSource = listaArticulos;
+            repRepetidor.DataBind();
 
         }
     }
