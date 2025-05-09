@@ -32,6 +32,7 @@ namespace TPWeb_equipo11_B
                     Response.Redirect("/.");
                 }
                 idArticulo = int.Parse(Request.QueryString["Id"]);
+                ViewState["Id"] = idArticulo;
             }
             else
             {
