@@ -13,15 +13,15 @@ namespace TPWeb_equipo11_B
     public partial class FormularioCliente : System.Web.UI.Page
     {
         string codigo;
-        int idArticulo=0;
+        int idArticulo = 0;
         public bool estaRegistrado { get; set; }
         public Cliente cliente;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-               
-                
+
+
                 codigo = Request.QueryString["codigo"];
                 ViewState["codigo"] = codigo;
 
@@ -38,14 +38,13 @@ namespace TPWeb_equipo11_B
                 codigo = ViewState["codigo"]?.ToString();
                 idArticulo = (int)ViewState["idArticulo"];
             }
-            
-        }
 
-        protected void AgregarCliente(object sender, EventArgs e)
-        {   
-            if(dni.Text.ToString()=="")
+
+
+
+            if (dni.Text.ToString() == "")
                 DesabilitarInputs();
-            
+
 
             if (cliente != null || dni.Text.IsNullOrWhiteSpace())
             {
@@ -53,11 +52,11 @@ namespace TPWeb_equipo11_B
                 checkTerminos.Enabled = true;
                 checkTerminos.Checked = false;
             }
-               
-            
+        }
+         
             
 
-        }
+        
 
         public void AgregarCliente(Cliente cliente)
         {
