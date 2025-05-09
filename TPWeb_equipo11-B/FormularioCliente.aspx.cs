@@ -36,7 +36,7 @@ namespace TPWeb_equipo11_B
             else
             {
                 codigo = ViewState["codigo"]?.ToString();
-                idArticulo = (int)ViewState["idArticulo"];
+                idArticulo = Convert.ToInt32(ViewState["Id"]);
             }
 
 
