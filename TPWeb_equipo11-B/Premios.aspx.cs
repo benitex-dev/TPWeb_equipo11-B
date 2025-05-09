@@ -11,15 +11,29 @@ namespace TPWeb_equipo11_B
 {
     public partial class Premios : System.Web.UI.Page
     {
+        string codigo;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                string codigo = Request.QueryString["codigo"];
+                codigo = Request.QueryString["codigo"];
+                ViewState["codigo"] = codigo;
+
+                VoucherNegocio voucher = new VoucherNegocio();
+
+                if ((codigo == null) && (voucher.verificarVoucher(codigo) != "Código válido"))
+                {
+                    Response.Redirect("/.");
+                }
+
                 CargarPremios();
             }
+            else
+            {
+                codigo = ViewState["codigo"]?.ToString();
+            }
         }
-
         private void CargarPremios()
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
@@ -32,7 +46,15 @@ namespace TPWeb_equipo11_B
 
         protected void repRepetidor_ItemCommand1(object source, RepeaterCommandEventArgs e)
         {
-            Response.Redirect("FormularioCliente.aspx");
+            if (e.CommandName == "eleccion")
+            {
+                int idArticulo = Convert.ToInt32(e.CommandArgument);
+                
+                Response.Redirect("FormularioCliente.aspx?Id=" + idArticulo + "&codigo=" + codigo, false);
+            }
+
         }
+
+
     }
 }
