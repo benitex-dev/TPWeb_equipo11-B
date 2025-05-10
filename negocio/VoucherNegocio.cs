@@ -50,7 +50,7 @@ namespace negocio
             }
         }
 
-        public void asignarVoucher(Voucher voucher)
+        public void asignarVoucher(Voucher voucher, int idCliente,int idArt)
         {
             AccesoDatos accesoDatos = new AccesoDatos();
 
@@ -58,8 +58,8 @@ namespace negocio
             {
                 accesoDatos.setConsulta("UPDATE VOUCHERS SET IDCLIENTE = @IdCliente, IDARTICULO = @IdArticulo, FechaCanje = GETDATE() WHERE CodigoVoucher = @CodigoVoucher ");
                 accesoDatos.setParametro("@CodigoVoucher", voucher.CodigoVoucher);
-                accesoDatos.setParametro("@IdCliente", voucher.Cliente.Id);
-                accesoDatos.setParametro("@IdArticulo", voucher.Articulo.Id);
+                accesoDatos.setParametro("@IdCliente", idCliente);
+                accesoDatos.setParametro("@IdArticulo", idArt);
                 accesoDatos.ejecutarAccion();
             }
             catch (Exception ex)

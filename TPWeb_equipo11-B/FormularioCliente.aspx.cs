@@ -18,7 +18,7 @@ namespace TPWeb_equipo11_B
         int idArticulo = 0;
         public bool verFormulario;
         public bool estaRegistrado {  get; set; }
-            
+        Cliente cliente;    
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -65,47 +65,27 @@ namespace TPWeb_equipo11_B
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             clienteNegocio.agregarCliente(cliente);
         }
-        public Articulo ObtenerArticulo()
-        {
-            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-            Articulo articulo = new Articulo();
-            List<Articulo> articulos = new List<Articulo>();
-            articulos = articuloNegocio.listar();
-            idArticulo = int.Parse(Session["Id"].ToString());
-            foreach (var a in articulos)
-            {
-                if(a.Id == idArticulo)
-                {
-                    articulo = a;
-                    return articulo;
-                }
-            }
-            return articulo;    
-        }
+        
         protected void OnClick(object sender, EventArgs e)
         {   VoucherNegocio voucherNegocio = new VoucherNegocio();
             ClienteNegocio clienteNegocio = new ClienteNegocio();
-               
             Voucher voucher = new Voucher();
-            Cliente cliente = new Cliente();
-            Articulo articulo = new Articulo();
+           
+           
+            bool nuevoCliente = false;
             int idCliente = int.Parse(Session["idCliente"].ToString());
-            
+
+            idArticulo = int.Parse(Session["Id"].ToString());
             try
             {
-                articulo = ObtenerArticulo();
-                cliente = clienteNegocio.GetClienteById(idCliente);
-
-                if (cliente.Id!=0)
+               
+                if (idCliente!=0)
                 {
                     if(checkTerminos.Checked)
                     {   
                         voucher.CodigoVoucher = codigo;
-                        voucher.Cliente = cliente;
-                        voucher.Articulo = articulo;
-
-                        voucherNegocio.asignarVoucher(voucher);
-                        Response.Redirect("VistaExito.aspx");
+                        voucherNegocio.asignarVoucher(voucher,idCliente,idArticulo);
+                        Response.Redirect("VistaExito.aspx",false);
                     }
                     else
                     {
@@ -116,6 +96,7 @@ namespace TPWeb_equipo11_B
                 }
                 else
                 {
+                    cliente = new Cliente();
                     cliente.Dni = dni.Text;
                     cliente.Nombre = nombre.Text;
                     cliente.Apellido = apellido.Text;
@@ -124,19 +105,29 @@ namespace TPWeb_equipo11_B
                     cliente.Ciudad = ciudad.Text;
                     cliente.CodPostal = int.Parse(cp.Text);
                     AgregarCliente(cliente);
+                    nuevoCliente = true;
+                }
+
+                if (nuevoCliente)
+                {
+                    cliente =  clienteNegocio.GetClienteByDni(cliente.Dni);
+                    
+                    voucher.CodigoVoucher = codigo;
+                    voucherNegocio.asignarVoucher(voucher, cliente.Id, idArticulo);
+                    Response.Redirect("VistaExito.aspx", false);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             
             
           
 
             
-            Response.Redirect("VistaExito.aspx");
+            
         }
 
         
@@ -146,7 +137,7 @@ namespace TPWeb_equipo11_B
             
             string numDNI = dni.Text.Trim();
             ClienteNegocio clienteNegocio = new ClienteNegocio();
-            Cliente cliente = new Cliente();
+            
             cliente = clienteNegocio.GetClienteByDni(numDNI);
             
             try
@@ -161,7 +152,7 @@ namespace TPWeb_equipo11_B
                 }
                 
                 
-                if (cliente!=null)
+                if (cliente.Equals(null))
                 {
                     estaRegistrado = true;
                     lblCliente.Text = "Ya te encuentras registrado en la WEB, puedes participar del sorteo.";
@@ -171,6 +162,8 @@ namespace TPWeb_equipo11_B
                 }
                 else
                 {
+                    int idCliente = 0;
+                    Session.Add("idCliente", idCliente);
                     estaRegistrado = false;
                     lblCliente.Text = "El número de DNI no se encuentra registrado, por favor complete el formulario para registrarte.";
                 }
