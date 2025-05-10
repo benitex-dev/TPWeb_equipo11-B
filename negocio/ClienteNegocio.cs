@@ -109,5 +109,41 @@ namespace negocio
                 accesoDatos.cerrarConexion();
             }
         }
+        public Cliente GetClienteById(int id)
+        {
+            AccesoDatos accesoDatos = new AccesoDatos();
+            Cliente cliente = new Cliente();
+            try
+            {
+                accesoDatos.setConsulta("SELECT Id, Documento, Nombre, Apellido, Email, Direccion, Ciudad, CP FROM Clientes WHERE Id=@id");
+                accesoDatos.setParametro("@id", id);
+                accesoDatos.ejecutarLectura();
+
+                while (accesoDatos.Lector.Read())
+                {
+
+                    cliente.Id = (int)accesoDatos.Lector["Id"];
+                    cliente.Dni = (string)accesoDatos.Lector["Documento"];
+                    cliente.Nombre = (string)accesoDatos.Lector["Nombre"];
+                    cliente.Apellido = (string)accesoDatos.Lector["Apellido"];
+                    cliente.Email = (string)accesoDatos.Lector["Email"];
+                    cliente.Direccion = (string)accesoDatos.Lector["Direccion"];
+                    cliente.Ciudad = (string)accesoDatos.Lector["Ciudad"];
+                    cliente.CodPostal = (int)accesoDatos.Lector["CP"];
+
+
+                }
+                return cliente;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.cerrarConexion();
+            }
+        }
     }
 }

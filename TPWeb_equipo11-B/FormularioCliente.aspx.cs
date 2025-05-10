@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -17,7 +18,7 @@ namespace TPWeb_equipo11_B
         int idArticulo = 0;
         public bool verFormulario;
         public bool estaRegistrado {  get; set; }
-        public Cliente cliente;
+            
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -34,7 +35,7 @@ namespace TPWeb_equipo11_B
                     Response.Redirect("/.");
                 }
                 
-                idArticulo = Session["Id"].ToString();                   
+                idArticulo =int.Parse( Session["Id"].ToString());                   
                 
 
             }
@@ -64,13 +65,57 @@ namespace TPWeb_equipo11_B
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             clienteNegocio.agregarCliente(cliente);
         }
-        protected void OnClick(object sender, EventArgs e)
+        public Articulo ObtenerArticulo()
         {
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            Articulo articulo = new Articulo();
+            List<Articulo> articulos = new List<Articulo>();
+            articulos = articuloNegocio.listar();
+            idArticulo = int.Parse(Session["Id"].ToString());
+            foreach (var a in articulos)
+            {
+                if(a.Id == idArticulo)
+                {
+                    articulo = a;
+                    return articulo;
+                }
+            }
+            return articulo;    
+        }
+        protected void OnClick(object sender, EventArgs e)
+        {   VoucherNegocio voucherNegocio = new VoucherNegocio();
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+               
+            Voucher voucher = new Voucher();
+            Cliente cliente = new Cliente();
+            Articulo articulo = new Articulo();
+            int idCliente = int.Parse(Session["idCliente"].ToString());
+            
             try
             {
-                if (!estaRegistrado)
-                {
+                articulo = ObtenerArticulo();
+                cliente = clienteNegocio.GetClienteById(idCliente);
 
+                if (cliente.Id!=0)
+                {
+                    if(checkTerminos.Checked)
+                    {   
+                        voucher.CodigoVoucher = codigo;
+                        voucher.Cliente = cliente;
+                        voucher.Articulo = articulo;
+
+                        voucherNegocio.asignarVoucher(voucher);
+                        Response.Redirect("VistaExito.aspx");
+                    }
+                    else
+                    {
+                        lblAceptaTermYCond.Visible = true;
+                        return;
+                    }
+                   
+                }
+                else
+                {
                     cliente.Dni = dni.Text;
                     cliente.Nombre = nombre.Text;
                     cliente.Apellido = apellido.Text;
@@ -94,32 +139,15 @@ namespace TPWeb_equipo11_B
             Response.Redirect("VistaExito.aspx");
         }
 
-        public Cliente GetClienteByDni(string dni)
-        {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-            try
-            {
-                cliente = clienteNegocio.GetClienteByDni(dni);
-                if (cliente.Id == 0)
-                {
-                    cliente = null;
-                }
-                return cliente;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-           
-           
-        }
+        
 
         protected void dni_TextChanged(object sender, EventArgs e)
         {
             
             string numDNI = dni.Text.Trim();
-            cliente = GetClienteByDni(numDNI);
+            ClienteNegocio clienteNegocio = new ClienteNegocio();
+            Cliente cliente = new Cliente();
+            cliente = clienteNegocio.GetClienteByDni(numDNI);
             
             try
             {
@@ -139,6 +167,7 @@ namespace TPWeb_equipo11_B
                     lblCliente.Text = "Ya te encuentras registrado en la WEB, puedes participar del sorteo.";
                     AutocompletarFormulario(cliente);
                     DesabilitarFormulario();
+                    Session.Add("idCliente", cliente.Id);
                 }
                 else
                 {

@@ -32,6 +32,9 @@ namespace negocio
             }
             finally { accesoDatos.cerrarConexion(); }
         }
+
+
+
         public void agregarArticulo(Articulo articulo)
         {   AccesoDatos accesoDatos = new AccesoDatos();
 
