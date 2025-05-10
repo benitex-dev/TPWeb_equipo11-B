@@ -28,18 +28,21 @@ namespace TPWeb_equipo11_B
             {
                 case("Código válido"):
                     lblPromo.Text = "Felicidades, tu código es válido!";
+                    lblPromo.CssClass = " alert alert-success" ;
                     btnPremio.Visible = true;
                     btnPromo.Visible = false;
                     codigoPromo.Visible = false;
                     break;
                 case ("Código ya usado"):
                     lblPromo.Text = "Lo sentimos! Tu código ya ha sido usado";
+                    lblPromo.CssClass = " alert alert-danger";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
                     codigoPromo.Visible = false;
                     break;
                 case ("Código inválido"):
                     lblPromo.Text = "Lo sentimos! Tu código no es valido";
+                    lblPromo.CssClass = " alert alert-danger";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
                     codigoPromo.Visible = false;
