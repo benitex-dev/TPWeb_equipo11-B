@@ -137,12 +137,13 @@ namespace TPWeb_equipo11_B
             
             string numDNI = dni.Text.Trim();
             ClienteNegocio clienteNegocio = new ClienteNegocio();
-            
-            cliente = clienteNegocio.GetClienteByDni(numDNI);
-            
+
+
+
             try
             {
-                
+                cliente = clienteNegocio.GetClienteByDni(numDNI);
+
                 if (Validacion.validaTextoVacio(dni))
                 {
                     DesabilitarFormulario();
@@ -150,9 +151,9 @@ namespace TPWeb_equipo11_B
                     checkTerminos.Enabled = false;
                     return;
                 }
-                
-                
-                if (cliente.Equals(null))
+
+
+                if (cliente.Dni!=null)
                 {
                     estaRegistrado = true;
                     lblCliente.Text = "Ya te encuentras registrado en la WEB, puedes participar del sorteo.";
@@ -166,20 +167,18 @@ namespace TPWeb_equipo11_B
                     Session.Add("idCliente", idCliente);
                     estaRegistrado = false;
                     lblCliente.Text = "El número de DNI no se encuentra registrado, por favor complete el formulario para registrarte.";
+                    HabilitarFormulario();
+                    LimpiarInputs();
                 }
 
-               
-                
+
+
             }
             catch (Exception ex)
             {
 
                 throw ex;
-            }  
-
-            
-
-            
+            }
         }
 
         
