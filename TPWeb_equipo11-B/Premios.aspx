@@ -6,7 +6,7 @@
 
     <div class="d-flex flex-row justify-content-evenly">
 
-        <asp:Repeater ID="repRepetidor" runat="server" OnItemCommand="repRepetidor_ItemCommand1">
+        <asp:Repeater ID="repRepetidor" runat="server" OnItemCommand="repRepetidor_ItemCommand">
             <ItemTemplate>
 
                 <div class="card" style="width: 18rem;">
