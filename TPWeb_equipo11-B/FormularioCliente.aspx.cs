@@ -3,6 +3,7 @@ using Microsoft.Ajax.Utilities;
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -13,7 +14,7 @@ namespace TPWeb_equipo11_B
     public partial class FormularioCliente : System.Web.UI.Page
     {
         string codigo;
-        int idArticulo = 0;
+        string idArticulo;
         public bool estaRegistrado { get; set; }
         public Cliente cliente;
         protected void Page_Load(object sender, EventArgs e)
@@ -27,17 +28,19 @@ namespace TPWeb_equipo11_B
 
                 VoucherNegocio voucher = new VoucherNegocio();
 
-                if ((codigo == null) || (voucher.verificarVoucher(codigo) != "Código válido"))
+                if ((codigo == null) || (voucher.verificarVoucher(codigo) != "Código válido") || (Session["Id"] == null))
                 {
                     Response.Redirect("/.");
                 }
-                idArticulo = int.Parse(Request.QueryString["Id"]);
-                ViewState["Id"] = idArticulo;
+                
+                idArticulo = Session["Id"].ToString();                   
+                
+
             }
             else
             {
                 codigo = ViewState["codigo"]?.ToString();
-                idArticulo = Convert.ToInt32(ViewState["Id"]);
+               
             }
 
 

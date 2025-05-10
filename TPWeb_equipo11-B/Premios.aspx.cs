@@ -43,14 +43,14 @@ namespace TPWeb_equipo11_B
 
         }
 
-
-        protected void repRepetidor_ItemCommand1(object source, RepeaterCommandEventArgs e)
+        string idArticulo;
+        protected void repRepetidor_ItemCommand(object source, RepeaterCommandEventArgs e)
         {
             if (e.CommandName == "eleccion")
             {
-                int idArticulo = Convert.ToInt32(e.CommandArgument);
-                
-                Response.Redirect("FormularioCliente.aspx?Id=" + idArticulo + "&codigo=" + codigo, false);
+                Session["Id"] = e.CommandArgument.ToString();                
+
+                Response.Redirect("FormularioCliente.aspx?codigo=" + codigo, false);
             }
 
         }
