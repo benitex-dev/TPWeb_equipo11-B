@@ -14,7 +14,8 @@ namespace TPWeb_equipo11_B
     {
         string codigo;
         int idArticulo = 0;
-        public bool estaRegistrado { get; set; }
+        public bool verFormulario;
+        public bool estaRegistrado {  get; set; }
         public Cliente cliente;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,18 +42,14 @@ namespace TPWeb_equipo11_B
             }
 
 
+            if (!IsPostBack)
+                verFormulario = false;
+            else
+                verFormulario = true;
 
+           
 
-            if (dni.Text.ToString() == "")
-                DesabilitarInputs();
-
-
-            if (cliente != null || dni.Text.IsNullOrWhiteSpace())
-            {
-                DesabilitarInputs();
-                checkTerminos.Enabled = true;
-                checkTerminos.Checked = false;
-            }
+           
         }
          
             
@@ -66,86 +63,88 @@ namespace TPWeb_equipo11_B
         }
         protected void OnClick(object sender, EventArgs e)
         {
-            
-            if (!estaRegistrado)
+            try
             {
-                
-                cliente.Dni = int.Parse(dni.Text);
-                cliente.Nombre = nombre.Text;
-                cliente.Apellido = apellido.Text;
-                cliente.Email = email.Text;
-                cliente.Direccion = direccion.Text;
-                cliente.Ciudad = ciudad.Text;
-                cliente.CodPostal = int.Parse(cp.Text);
-                AgregarCliente(cliente);
+                if (!estaRegistrado)
+                {
+
+                    cliente.Dni = dni.Text;
+                    cliente.Nombre = nombre.Text;
+                    cliente.Apellido = apellido.Text;
+                    cliente.Email = email.Text;
+                    cliente.Direccion = direccion.Text;
+                    cliente.Ciudad = ciudad.Text;
+                    cliente.CodPostal = int.Parse(cp.Text);
+                    AgregarCliente(cliente);
+                }
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+            
           
 
             
             Response.Redirect("VistaExito.aspx");
         }
 
-        protected void BuscarCliente(object sender, EventArgs e)
-        {
-            //ClienteNegocio clienteNegocio = new ClienteNegocio();
-            //Cliente cliente = new Cliente();
-            
-            //cliente=clienteNegocio.GetClienteByDni(int.Parse( dni.Text));
-            //if (cliente.Id == 0)
-            //    lblCliente.Text = "El número de DNI no se encuentra registrado, por favor complete el formulario para participar.";
-            //else
-            //lblCliente.Text = cliente.Email.ToString();
-        }
-
-        public Cliente GetCliente(int dni)
+        public Cliente GetClienteByDni(string dni)
         {
             ClienteNegocio clienteNegocio = new ClienteNegocio();
-            cliente = clienteNegocio.GetClienteByDni(dni);
-            if (cliente.Id == 0)
+            try
             {
-                cliente = null;
+                cliente = clienteNegocio.GetClienteByDni(dni);
+                if (cliente.Id == 0)
+                {
+                    cliente = null;
+                }
+                return cliente;
             }
-            return cliente;
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+           
         }
 
         protected void dni_TextChanged(object sender, EventArgs e)
         {
-            ClienteNegocio clienteNegocio = new ClienteNegocio();
-
+            
+            string numDNI = dni.Text.Trim();
+            cliente = GetClienteByDni(numDNI);
+            
             try
             {
+                
                 if (Validacion.validaTextoVacio(dni))
                 {
-                    lblCliente.Text = "por favor ingrese un dni";
-                    Session.Add("error", "Debes ingresar tu dni");
+                    DesabilitarFormulario();
+                    btnAgregar.Enabled = false;
+                    checkTerminos.Enabled = false;
+                    return;
                 }
-                cliente = GetCliente(int.Parse(dni.Text));
-                if (cliente== null)
+                
+                
+                if (cliente!=null)
                 {
-                    lblCliente.Text = "El número de DNI no se encuentra registrado, por favor complete el formulario para participar.";
-                    dni.Text = dni.Text.ToString();
-                    email.Text = "";
-                    nombre.Text = "";
-                    apellido.Text = "";
-                    direccion.Text = "";
-                    ciudad.Text = "";
-                    cp.Text = "".ToString();
-                    HabilitarControles();
-                    estaRegistrado = false;
+                    estaRegistrado = true;
+                    lblCliente.Text = "Ya te encuentras registrado en la WEB, puedes participar del sorteo.";
+                    AutocompletarFormulario(cliente);
+                    DesabilitarFormulario();
                 }
                 else
                 {
-
-                    dni.Text = cliente.Dni.ToString();
-                    email.Text = cliente.Email.ToString();
-                    nombre.Text = cliente.Nombre.ToString();
-                    apellido.Text = cliente.Apellido.ToString();
-                    direccion.Text = cliente.Direccion.ToString();
-                    ciudad.Text = cliente.Ciudad.ToString();
-                    cp.Text = cliente.CodPostal.ToString();
-                    estaRegistrado = true;
-                    DesabilitarInputs();
+                    estaRegistrado = false;
+                    lblCliente.Text = "El número de DNI no se encuentra registrado, por favor complete el formulario para registrarte.";
                 }
+
+               
+                
             }
             catch (Exception ex)
             {
@@ -157,7 +156,30 @@ namespace TPWeb_equipo11_B
 
             
         }
-        public void DesabilitarInputs()
+
+        
+
+        public void AutocompletarFormulario(Cliente cliente)
+        {
+            dni.Text = cliente.Dni.ToString();
+            email.Text = cliente.Email.ToString();
+            nombre.Text = cliente.Nombre.ToString();
+            apellido.Text = cliente.Apellido.ToString();
+            direccion.Text = cliente.Direccion.ToString();
+            ciudad.Text = cliente.Ciudad.ToString();
+            cp.Text = cliente.CodPostal.ToString();  
+        }
+        public void LimpiarInputs()
+        {
+            dni.Text = "";
+            email.Text = "";
+            nombre.Text = "";
+            apellido.Text = "";
+            direccion.Text = "";
+            ciudad.Text = "";
+            cp.Text = "".ToString();
+        }
+        public void DesabilitarFormulario()
         {
             
             email.Enabled = false;
@@ -166,8 +188,9 @@ namespace TPWeb_equipo11_B
             direccion.Enabled = false;
             ciudad.Enabled = false;
             cp.Enabled = false;
+           
         }
-        public void HabilitarControles()
+        public void HabilitarFormulario()
         {
 
             email.Enabled = true;

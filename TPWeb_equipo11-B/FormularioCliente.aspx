@@ -9,48 +9,55 @@
            
             <asp:Label runat="server" ID="lblCliente" CssClass="form-label"></asp:Label>
         </div>
-        <div class="d-flex flex-row" style="align-items: center">
-            <div class="">
-                <label for="nombre" class="form-label">Nombre</label>
-                 <asp:TextBox runat="server" placeholder="Mi nombre" CssClass="form-control" ID="nombre"></asp:TextBox>
-                
-            </div>
-            <div class="m-2">
-                <label for="apellido" class="form-label">Apellido</label>
-                 <asp:TextBox runat="server" type="text"  placeholder="Mi apellido" CssClass="form-control"  ID="apellido"></asp:TextBox>
-              
-            </div>
-            <div class="m-2">
-                <label for="email" class="form-label">Email</label>
-                 <asp:TextBox runat="server" AutoCompleteType="Email" placeholder="email@gmail.com" CssClass="form-control"  ID="email"></asp:TextBox>   
-            </div>
-        </div>
-        <div class="d-flex flex-row" style="align-items: center">
-            <div>
-                <label for="direccion" class="form-label">Dirección</label>
-                 <asp:TextBox runat="server" placeholder="Mi dirección" CssClass="form-control" ID="direccion"></asp:TextBox>
-            </div>
-            <div class="m-2">
-                <label for="ciudad" class="form-label">Ciudad</label>
-                 <asp:TextBox runat="server" placeholder="Mi Ciudad"  CssClass="form-control" ID="ciudad"></asp:TextBox>     
-            </div>
-            <div class="m-2">
-                <label for="cp" class="form-label">CP</label>
-                 <asp:TextBox runat="server" placeholder="Mi Cod Postal" CssClass="form-control" ID="cp"></asp:TextBox>               
-            </div>
+    <%
+        if (verFormulario)
+        {
+    %>
+      <div class="d-flex flex-row" style="align-items: center">
+      <div class="">
+          <label for="nombre" class="form-label">Nombre</label>
+          <asp:TextBox runat="server" placeholder="Mi nombre" CssClass="form-control" ID="nombre"></asp:TextBox>
 
-        </div>
-       
-        <%--checkbox--%>
-        <div class="form-check">
-           
-           <asp:CheckBox runat="server" AutoPostBack="true" OnCheckedChanged="checkTerminos_CheckedChanged"  CssClass="form-check-input" type="checkbox" ID="checkTerminos"/>
-            <label class="form-check-label" for="checkTerminos">
-                Acepta terminos y condiciones
-            </label>
-        </div>
-       
-        <asp:Button runat="server" Text="Participar!" ID="btnAgregar" OnClick="OnClick" CssClass="btn btn-primary"/>
+      </div>
+      <div class="m-2">
+          <label for="apellido" class="form-label">Apellido</label>
+          <asp:TextBox runat="server" type="text" placeholder="Mi apellido" CssClass="form-control" ID="apellido"></asp:TextBox>
+
+      </div>
+      <div class="m-2">
+          <label for="email" class="form-label">Email</label>
+          <asp:TextBox runat="server" AutoCompleteType="Email" placeholder="email@gmail.com" CssClass="form-control" ID="email"></asp:TextBox>
+      </div>
+  </div>
+  <div class="d-flex flex-row" style="align-items: center">
+      <div>
+          <label for="direccion" class="form-label">Dirección</label>
+          <asp:TextBox runat="server" placeholder="Mi dirección" CssClass="form-control" ID="direccion"></asp:TextBox>
+      </div>
+      <div class="m-2">
+          <label for="ciudad" class="form-label">Ciudad</label>
+          <asp:TextBox runat="server" placeholder="Mi Ciudad" CssClass="form-control" ID="ciudad"></asp:TextBox>
+      </div>
+      <div class="m-2">
+          <label for="cp" class="form-label">CP</label>
+          <asp:TextBox runat="server" placeholder="Mi Cod Postal" CssClass="form-control" ID="cp"></asp:TextBox>
+      </div>
+
+  </div>
+     
+      <%--checkbox--%>
+      <div class="form-check">
+         
+         <asp:CheckBox runat="server" AutoPostBack="true" OnCheckedChanged="checkTerminos_CheckedChanged"  CssClass="form-check-input" type="checkbox" ID="checkTerminos"/>
+          <label class="form-check-label" for="checkTerminos">
+              Acepta terminos y condiciones
+          </label>
+      </div>
+     
+      <asp:Button runat="server" Text="Participar!" ID="btnAgregar" OnClick="OnClick" CssClass="btn btn-primary"/>
+
+    <%}%>
+  
         
     
     

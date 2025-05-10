@@ -51,7 +51,7 @@ namespace negocio
                 {
                     Cliente cliente = new Cliente ();
                     cliente.Id =(int) accesoDatos.Lector["Id"];
-                    cliente.Dni = (int)accesoDatos.Lector["Documento"];
+                    cliente.Dni = (string)accesoDatos.Lector["Documento"];
                     cliente.Nombre =(string) accesoDatos.Lector["Nombre"];
                     cliente.Apellido = (string)accesoDatos.Lector["Apellido"];
                     cliente.Email = (string)accesoDatos.Lector["Email"];
@@ -73,7 +73,7 @@ namespace negocio
                 accesoDatos.cerrarConexion();
             }
         }
-        public Cliente GetClienteByDni(int dni)
+        public Cliente GetClienteByDni(string dni)
         {
             AccesoDatos accesoDatos = new AccesoDatos();
             Cliente cliente = new Cliente();
@@ -87,7 +87,7 @@ namespace negocio
                 {
                     
                     cliente.Id = (int)accesoDatos.Lector["Id"];
-                    cliente.Dni = int.Parse(accesoDatos.Lector["Documento"].ToString()) ;
+                    cliente.Dni =(string) accesoDatos.Lector["Documento"];
                     cliente.Nombre = (string)accesoDatos.Lector["Nombre"];
                     cliente.Apellido = (string)accesoDatos.Lector["Apellido"];
                     cliente.Email = (string)accesoDatos.Lector["Email"];
