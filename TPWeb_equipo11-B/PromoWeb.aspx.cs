@@ -59,6 +59,8 @@ namespace TPWeb_equipo11_B
 
         protected void btnPremio_Click(object sender, EventArgs e)
         {
+            
+
             Response.Redirect("/Premios.aspx?codigo="+ codigoPromo.Text, false);
         }
     }

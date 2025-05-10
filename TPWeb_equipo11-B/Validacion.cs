@@ -22,5 +22,19 @@ namespace TPWeb_equipo11_B
 
             return false;
         }
+
+
+        public static bool validaNumeros(object control)
+        {
+            if(control is TextBox texto)
+            {
+                if (texto.Text.Length == 8 && texto.Text.All(char.IsDigit))
+                    return true;
+                else
+                    return false;
+            }
+
+            return false;
+        }
     }
 }
