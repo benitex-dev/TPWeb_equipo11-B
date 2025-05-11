@@ -96,6 +96,21 @@ namespace TPWeb_equipo11_B
                 }
                 else
                 {
+
+                    if(Validacion.validaTextoVacio(nombre) ||
+                        Validacion.validaTextoVacio(apellido) ||
+                        Validacion.validaTextoVacio(email) ||
+                        Validacion.validaTextoVacio(direccion) ||
+                        Validacion.validaTextoVacio(ciudad) ||
+                        Validacion.validaTextoVacio(cp))
+                    {
+                        LblError.Visible = true;
+                        LblError.Text = "Se deben completar todos los campos";
+                        LblError.CssClass = "text-danger";
+                        return;
+                    }
+
+
                     cliente = new Cliente();
                     cliente.Dni = dni.Text;
                     cliente.Nombre = nombre.Text;
@@ -111,6 +126,7 @@ namespace TPWeb_equipo11_B
                 if (nuevoCliente)
                 {
                     cliente =  clienteNegocio.GetClienteByDni(cliente.Dni);
+
                     
                     voucher.CodigoVoucher = codigo;
                     voucherNegocio.asignarVoucher(voucher, cliente.Id, idArticulo);
