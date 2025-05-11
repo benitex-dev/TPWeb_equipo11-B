@@ -53,7 +53,7 @@
         <label class="form-check-label" for="checkTerminos">
             Acepta terminos y condiciones
         </label>
-        <asp:Label runat="server" ID="lblAceptaTermYCond" Visible="false" CssClass="form-check-label --bs-danger-text-emphasis" for="checkTerminos">
+        <asp:Label runat="server" ID="lblAceptaTermYCond" Visible="false" CssClass="form-check-label text-danger" for="checkTerminos">
             Para continuar debes aceptar los terminos y condiciones.
         </asp:Label>
     </div>
