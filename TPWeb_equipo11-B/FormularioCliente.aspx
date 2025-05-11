@@ -27,7 +27,7 @@
         </div>
         <div class="m-2">
             <label for="email" class="form-label">Email</label>
-            <asp:TextBox runat="server" AutoCompleteType="Email" placeholder="email@gmail.com" CssClass="form-control" ID="email"></asp:TextBox>
+            <asp:TextBox runat="server" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" AutoCompleteType="Email" placeholder="email@gmail.com" CssClass="form-control" ID="email"></asp:TextBox>
         </div>
     </div>
     <div class="d-flex flex-row" style="align-items: center">
