@@ -60,7 +60,16 @@
     <div class ="d-flex flex-column">
 
         <asp:Label runat="server" ID="LblError" Visible="false"> </asp:Label>
-        <asp:Button runat="server" Text="Participar!" ID="btnAgregar" OnClick="OnClick" CssClass="btn btn-primary" />
+        <div>
+            <asp:Button 
+                runat="server" 
+                Text="Participar!" 
+                ID="btnAgregar" 
+                OnClick="OnClick" 
+                CssClass="btn btn-primary "
+                />
+
+        </div>
 
     </div>
 
