@@ -86,6 +86,7 @@ namespace TPWeb_equipo11_B
                     {   
                         voucher.CodigoVoucher = codigo;
                         voucherNegocio.asignarVoucher(voucher,idCliente,idArticulo);
+                        Session.Add("codigo", voucher.CodigoVoucher);
                         Response.Redirect("VistaExito.aspx",false);
                     }
                     else
@@ -135,8 +136,9 @@ namespace TPWeb_equipo11_B
                     voucherNegocio.asignarVoucher(voucher, cliente.Id, idArticulo);
                     emailService.armarCorreo(cliente.Email, "Sorteo", "<h1>Confirmacion.</h1>" + "  <br> Hola! " + cliente.Nombre + " " + cliente.Apellido + " ha sido inscripto en el sorteo exitosamente.</br>");
                     emailService.enviarEmail();
-
+                    Session.Add("codigo", voucher.CodigoVoucher);
                     Response.Redirect("VistaExito.aspx", false);
+
                 }
             }
             catch (Exception ex)
