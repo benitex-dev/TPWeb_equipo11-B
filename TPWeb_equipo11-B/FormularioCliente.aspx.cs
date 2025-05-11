@@ -162,7 +162,7 @@ namespace TPWeb_equipo11_B
 
             if (!Validacion.validaNumeros(dni))
             {
-                lblCliente.Text = "El número de DNI es incorrecto, intentalo nuevamente.";
+                lblCliente.Text = "El número de DNI es incorrecto, intentalo nuevamente.\nDebe tener 8 caracteres y solamente números. Ejemplo: 33789555 ó 01233565";
                 lblCliente.CssClass = "text-danger";
                 DesabilitarFormulario();
                 verFormulario = false;
