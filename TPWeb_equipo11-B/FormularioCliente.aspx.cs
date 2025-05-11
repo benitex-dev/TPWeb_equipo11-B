@@ -104,7 +104,9 @@ namespace TPWeb_equipo11_B
                         Validacion.validaTextoVacio(email) ||
                         Validacion.validaTextoVacio(direccion) ||
                         Validacion.validaTextoVacio(ciudad) ||
-                        Validacion.validaTextoVacio(cp))
+                        Validacion.validaTextoVacio(cp) ||
+                        checkTerminos.Checked == false)
+
                     {
                         LblError.Visible = true;
                         LblError.Text = "Se deben completar todos los campos";
