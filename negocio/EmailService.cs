@@ -17,7 +17,7 @@ namespace negocio
         public EmailService()
         {
             server = new SmtpClient();
-            server.Credentials = new NetworkCredential("", "");
+            server.Credentials = new NetworkCredential("promoweb.utn@gmail.com", "xgbvcrphrrncsmgw");
             server.EnableSsl = true;
             server.Port = 587;
             server.Host = "smtp.gmail.com";
@@ -32,8 +32,8 @@ namespace negocio
             email.To.Add(emailDestino);
             email.Subject= asunto;
             email.IsBodyHtml= true;
-            email.Body = "<h1>Confirmacion</h1> <br> Hola, recibimos tu inscripcion para el sorteo, recordá que el codigo voucher no tiene mas validez.</br>";
-            //email.Body = cuerpo;
+            //email.Body = "<h1>Confirmacion</h1> <br> Hola, recibimos tu inscripcion para el sorteo, recordá que el codigo voucher no tiene mas validez.</br>";
+            email.Body = cuerpo;
         }
 
         public void enviarEmail()

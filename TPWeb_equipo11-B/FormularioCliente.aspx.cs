@@ -70,6 +70,7 @@ namespace TPWeb_equipo11_B
         {   VoucherNegocio voucherNegocio = new VoucherNegocio();
             ClienteNegocio clienteNegocio = new ClienteNegocio();
             Voucher voucher = new Voucher();
+            EmailService emailService = new EmailService();
            
            
             bool nuevoCliente = false;
@@ -121,6 +122,8 @@ namespace TPWeb_equipo11_B
                     cliente.CodPostal = int.Parse(cp.Text);
                     AgregarCliente(cliente);
                     nuevoCliente = true;
+                    emailService.armarCorreo(cliente.Email, "Registro", "<h1>Confirmacion de registro de nuevo cliente.</h1>" + "  <br> Hola! " + cliente.Nombre+ " " + cliente.Apellido+ " ha sido registrado exitosamente.</br>");
+                    emailService.enviarEmail();
                 }
 
                 if (nuevoCliente)
@@ -130,6 +133,9 @@ namespace TPWeb_equipo11_B
                     
                     voucher.CodigoVoucher = codigo;
                     voucherNegocio.asignarVoucher(voucher, cliente.Id, idArticulo);
+                    emailService.armarCorreo(cliente.Email, "Sorteo", "<h1>Confirmacion.</h1>" + "  <br> Hola! " + cliente.Nombre + " " + cliente.Apellido + " ha sido inscripto en el sorteo exitosamente.</br>");
+                    emailService.enviarEmail();
+
                     Response.Redirect("VistaExito.aspx", false);
                 }
             }

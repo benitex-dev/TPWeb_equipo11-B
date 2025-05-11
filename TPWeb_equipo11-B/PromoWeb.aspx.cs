@@ -34,14 +34,14 @@ namespace TPWeb_equipo11_B
                     codigoPromo.Visible = false;
                     break;
                 case ("Código ya usado"):
-                    lblPromo.Text = "Lo sentimos! Tu código ya ha sido usado";
+                    lblPromo.Text = "Tu código ya ha sido usado";
                     lblPromo.CssClass = " alert alert-danger";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
                     codigoPromo.Visible = false;
                     break;
                 case ("Código inválido"):
-                    lblPromo.Text = "Lo sentimos! Tu código no es valido";
+                    lblPromo.Text = "Tu código no es valido";
                     lblPromo.CssClass = " alert alert-danger";
                     btnPromo.Visible = false;
                     btnInicio.Visible = true;
